@@ -122,6 +122,9 @@ export type SiteCopy = {
     messageLabel: string;
     submit: string;
     submittedMessage: string;
+    sendingLabel: string;
+    errorMessage: string;
+    fallbackMessage: string;
     socialTitle: string;
     locationLabel: string;
   };
@@ -322,7 +325,10 @@ export const translations: Record<Language, SiteCopy> = {
       emailFieldLabel: "Email",
       messageLabel: "Message",
       submit: "Send message",
-      submittedMessage: "Draft ready.",
+      submittedMessage: "Message ready in your mail app.",
+      sendingLabel: "Sending…",
+      errorMessage: "We couldn't prepare your message. Please try again or email me directly.",
+      fallbackMessage: "If your mail app didn't open, write to",
       socialTitle: "Find me elsewhere",
       locationLabel: "Córdoba, Argentina",
     },
@@ -520,7 +526,10 @@ export const translations: Record<Language, SiteCopy> = {
       emailFieldLabel: "Correo",
       messageLabel: "Mensaje",
       submit: "Enviar mensaje",
-      submittedMessage: "Borrador listo.",
+      submittedMessage: "Mensaje listo en tu app de correo.",
+      sendingLabel: "Enviando…",
+      errorMessage: "No pudimos preparar tu mensaje. Intentá de nuevo o escribime directamente por correo.",
+      fallbackMessage: "Si no se abrió tu app de correo, escribime a",
       socialTitle: "También podés encontrarme en",
       locationLabel: "Córdoba, Argentina",
     },
