@@ -33,7 +33,7 @@ El workflow `.github/workflows/deploy.yml` construye y publica el sitio al hacer
 
 ## Personalización rápida
 
-- **Foto:** `public/avatar-Facundo.webp` se usa en la sección Sobre mí y está optimizada para la web. `app/icon.png` usa un recorte de la misma foto como favicon. Reemplazá esos archivos si cambiás el retrato.
+- **Foto:** `public/avatar-Facundo.webp` se usa en la sección Sobre mí y en el avatar del navbar, y está optimizada para la web. `app/icon.png` es el favicon con el monograma "FS". Reemplazá esos archivos si cambiás el retrato o el monograma.
 - **CV:** los botones descargan `public/Facundo_Scholze_fsENG.pdf` o `public/Facundo_Scholze_fsESP.pdf` según el idioma. Actualizá las rutas en `components/Hero.tsx` si cambiás los nombres.
 - **Textos e idiomas:** editá `lib/translations.ts`. Los bloques de perfil, proyectos, educación, idiomas y soft skills suministrados para este sitio se mantienen textualmente en el diccionario.
 - **Skills:** agregá o quitá tecnologías en `lib/skills.ts`; los nombres traducibles se mapean dentro de `skills.skillLabels`.

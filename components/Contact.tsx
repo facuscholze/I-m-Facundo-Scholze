@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
-import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/site";
+import { CONTACT_EMAIL, CONTACT_PHONE, gmailComposeUrl, openExternalTabOrFollow } from "@/lib/site";
 import type { SiteCopy } from "@/lib/translations";
 
 type ContactProps = {
@@ -12,28 +12,79 @@ type ContactProps = {
   social: SiteCopy["social"];
 };
 
+type SubmitState = "idle" | "sending" | "success" | "error";
+
+const GMAIL_DIRECT_URL = gmailComposeUrl();
+
 export function Contact({ copy, social }: ContactProps) {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [composeUrl, setComposeUrl] = useState<string | null>(null);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    // Capture the form synchronously: React clears event.currentTarget as
+    // soon as an async handler yields at its first await.
+    const form = event.currentTarget;
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
 
-    const plainTextBody = `${copy.nameLabel}: ${name}\n${copy.emailFieldLabel}: ${email}\n\n${message}`;
-    const subject = encodeURIComponent(`${copy.emailSubject} ${name}`);
-    const body = encodeURIComponent(plainTextBody);
+    if (submitState === "sending") return;
+    setSubmitState("sending");
 
-    // The site is a static export: copy the message as a fallback, then open
-    // the visitor's mail app with the same details pre-filled.
-    if (navigator.clipboard?.writeText) {
-      void navigator.clipboard.writeText(plainTextBody).catch(() => undefined);
+    try {
+      const formData = new FormData(form);
+      const name = String(formData.get("name") ?? "").trim();
+      const reason = String(formData.get("reason") ?? "").trim();
+      const message = String(formData.get("message") ?? "").trim();
+
+      // Native `required` validation runs before this event fires; this guard
+      // keeps the UI from ever reporting success for an incomplete payload.
+      if (!name || !reason || !message) {
+        setSubmitState("error");
+        return;
+      }
+
+      const plainTextBody = `${copy.nameLabel}: ${name}\n\n${message}`;
+      const gmailUrl = gmailComposeUrl({ to: CONTACT_EMAIL, subject: reason, body: plainTextBody });
+      setComposeUrl(gmailUrl);
+
+      // Open Gmail while the click's user-activation is still fresh:
+      // - Regular tab → redirect this tab to Gmail (the requested behavior).
+      // - Embedded preview iframe → open a new tab so the host UI is not
+      //   navigated away; fall through to the redirect if popups are blocked.
+      const isEmbedded = window.top !== window;
+      let openedTab: Window | null = null;
+      if (isEmbedded) {
+        openedTab = window.open(gmailUrl, "_blank");
+        if (openedTab) {
+          try {
+            openedTab.opener = null;
+          } catch {
+            // Cross-origin assignment can be refused; the tab is already open.
+          }
+        }
+      }
+
+      // Copy the full message as a best-effort fallback; never blocks the send.
+      const clipboardPayload = `${copy.reasonFieldLabel}: ${reason}\n${copy.nameLabel}: ${name}\n\n${message}`;
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(clipboardPayload).catch(() => undefined);
+      }
+
+      // Yield long enough for the loading state to paint before we leave.
+      await new Promise((resolve) => setTimeout(resolve, 350));
+
+      form.reset();
+      setSubmitState("success");
+
+      if (!openedTab) {
+        window.location.href = gmailUrl;
+      }
+    } catch {
+      // Keep the visitor's input on failure so they can retry without retyping.
+      setSubmitState("error");
     }
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setHasSubmitted(true);
   };
+
+  const isSending = submitState === "sending";
 
   return (
     <section className="content-section contact-section" id="contact" aria-labelledby="contact-title">
@@ -47,7 +98,11 @@ export function Contact({ copy, social }: ContactProps) {
             <span className="contact-spark" aria-hidden="true">✳</span>
             <h3>{copy.lead}</h3>
             <div className="contact-details">
-              <a className="contact-detail" href={`mailto:${CONTACT_EMAIL}`}>
+              <a
+                className="contact-detail"
+                href={GMAIL_DIRECT_URL}
+                onClick={(event) => openExternalTabOrFollow(event, GMAIL_DIRECT_URL)}
+              >
                 <span className="contact-detail-icon" aria-hidden="true">↗</span>
                 <span><small>{copy.emailLabel}</small><strong>{CONTACT_EMAIL}</strong></span>
               </a>
@@ -77,18 +132,40 @@ export function Contact({ copy, social }: ContactProps) {
                 <input name="name" type="text" autoComplete="name" required />
               </label>
               <label className="form-field">
-                <span>{copy.emailFieldLabel}</span>
-                <input name="email" type="email" autoComplete="email" required />
+                <span>{copy.reasonFieldLabel}</span>
+                <input name="reason" type="text" autoComplete="off" required />
               </label>
               <label className="form-field form-field--message">
                 <span>{copy.messageLabel}</span>
                 <textarea name="message" rows={4} required />
               </label>
               <div className="contact-form-bottom">
-                <button className="button button--primary contact-submit" type="submit">
-                  <span>{copy.submit}</span><span className="button-arrow" aria-hidden="true">↗</span>
+                <button
+                  className="button button--primary contact-submit"
+                  type="submit"
+                  disabled={isSending}
+                  aria-busy={isSending}
+                >
+                  <span>{isSending ? copy.sendingLabel : copy.submit}</span><span className="button-arrow" aria-hidden="true">↗</span>
                 </button>
-                {hasSubmitted ? <p className="form-note" role="status" aria-live="polite">{copy.submittedMessage}</p> : null}
+                {submitState === "success" ? (
+                  <p className="form-note form-note--sent" role="status" aria-live="polite">
+                    <span className="form-note-check" aria-hidden="true">✓</span>
+                    <span>
+                      {copy.submittedMessage}{" "}
+                      <a
+                        className="form-note-link"
+                        href={composeUrl ?? GMAIL_DIRECT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {copy.fallbackMessage} {CONTACT_EMAIL}
+                      </a>
+                    </span>
+                  </p>
+                ) : submitState === "error" ? (
+                  <p className="form-note form-note--error" role="alert">{copy.errorMessage}</p>
+                ) : null}
               </div>
             </form>
           </Reveal>

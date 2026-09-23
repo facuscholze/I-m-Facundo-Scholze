@@ -19,3 +19,6 @@ next-env.d.ts
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Local verification artifacts (form-flow screenshots + scripts)
+/.diag/

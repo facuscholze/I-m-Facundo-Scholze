@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
+import { GITHUB_URL, LINKEDIN_URL, gmailComposeUrl, openExternalTabOrFollow } from "@/lib/site";
 
 type SocialLinksProps = {
   labels: {
@@ -39,8 +39,9 @@ export function SocialLinks({ labels, variant = "icons" }: SocialLinksProps) {
     {
       name: labels.emailName,
       label: labels.email,
-      href: `mailto:${CONTACT_EMAIL}`,
+      href: gmailComposeUrl(),
       external: false,
+      onClick: (event: { preventDefault(): void }) => openExternalTabOrFollow(event, gmailComposeUrl()),
       icon: (
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -61,6 +62,7 @@ export function SocialLinks({ labels, variant = "icons" }: SocialLinksProps) {
           title={link.label}
           target={link.external ? "_blank" : undefined}
           rel={link.external ? "noreferrer" : undefined}
+          onClick={link.onClick}
         >
           <span className="social-icon">{link.icon}</span>
           {variant === "text" ? <span>{link.name}</span> : null}
