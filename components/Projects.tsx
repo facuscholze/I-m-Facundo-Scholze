@@ -48,7 +48,7 @@ export function Projects({ copy }: ProjectsProps) {
                         {copy.confidential}
                       </span>
                     )}
-                    <span className="project-index">FS / 0{index + 1}</span>
+                    <span className="project-index">0{index + 1}</span>
                   </div>
                 </div>
               </article>

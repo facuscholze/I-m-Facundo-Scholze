@@ -49,7 +49,6 @@ export type SiteCopy = {
     statement: string;
     viewProjects: string;
     downloadCv: string;
-    scroll: string;
     focusLabel: string;
     focusTitle: string;
     focusItems: string[];
@@ -66,9 +65,6 @@ export type SiteCopy = {
     title: string;
     lead: string;
     profile: string;
-    portraitAlt: string;
-    portraitLabel: string;
-    portraitNote: string;
     stats: { value: string; label: string; note: string }[];
   };
   skills: {
@@ -121,20 +117,16 @@ export type SiteCopy = {
     phoneLabel: string;
     formTitle: string;
     nameLabel: string;
-    namePlaceholder: string;
     emailFieldLabel: string;
-    emailPlaceholder: string;
     messageLabel: string;
-    messagePlaceholder: string;
     submit: string;
-    sendingNote: string;
+    submittedMessage: string;
     socialTitle: string;
     locationLabel: string;
   };
   footer: {
     note: string;
     rights: string;
-    backToTop: string;
   };
 };
 
@@ -176,7 +168,6 @@ export const translations: Record<Language, SiteCopy> = {
       statement: "I build reliable backend platforms and pragmatic AI automations.",
       viewProjects: "Explore projects",
       downloadCv: "Download CV",
-      scroll: "Scroll to explore",
       focusLabel: "BUILDING WITH INTENT",
       focusTitle: "From robust APIs to useful AI agents.",
       focusItems: ["Backend systems", "AI workflows", "Business automation"],
@@ -194,9 +185,6 @@ export const translations: Record<Language, SiteCopy> = {
       lead: "Backend foundations. A growing AI practice. One clear goal: build things that work.",
       profile:
         "Backend Developer with experience in Java and Spring Boot, focused on building REST APIs and working with relational databases. Passionate about backend architecture, automation, and scalable systems. Recently expanding into AI-driven solutions, developing agent-based workflows and automation pipelines using modern AI tools. I enjoy solving complex problems and continuously learning new technologies, and I am currently seeking opportunities where I can contribute to backend and AI-powered systems while growing professionally.",
-      portraitAlt: "Abstract dark portrait placeholder with the initials FS",
-      portraitLabel: "YOUR PHOTO GOES HERE",
-      portraitNote: "Replace this image with your portrait",
       stats: [
         { value: "Project-based", label: "Backend experience", note: "APIs · databases · automation" },
         { value: "Córdoba, AR", label: "Based in", note: "Argentina · UTC−3" },
@@ -324,25 +312,21 @@ export const translations: Record<Language, SiteCopy> = {
       title: "Have a good problem to solve?",
       lead: "Let's build something thoughtful.",
       description:
-        "Tell me what you're working on. I’m open to backend roles, AI automation projects, and collaborations.",
+        "I’m open to backend roles, AI automation projects, and collaborations.",
       emailLabel: "Email",
       phoneLabel: "Phone",
       formTitle: "Send a message",
-      nameLabel: "Your name",
-      namePlaceholder: "How should I call you?",
-      emailFieldLabel: "Email address",
-      emailPlaceholder: "you@company.com",
-      messageLabel: "What are you building?",
-      messagePlaceholder: "A little context goes a long way...",
-      submit: "Open email draft",
-      sendingNote: "Your email app will open with the message ready to send.",
+      nameLabel: "Name",
+      emailFieldLabel: "Email",
+      messageLabel: "Message",
+      submit: "Send message",
+      submittedMessage: "Draft ready.",
       socialTitle: "Find me elsewhere",
       locationLabel: "Córdoba, Argentina",
     },
     footer: {
       note: "Designed with care. Built with code.",
       rights: "All rights reserved.",
-      backToTop: "Back to top",
     },
   },
   es: {
@@ -380,7 +364,6 @@ export const translations: Record<Language, SiteCopy> = {
       statement: "Construyo backends confiables y automatizaciones de IA útiles.",
       viewProjects: "Ver proyectos",
       downloadCv: "Descargar CV",
-      scroll: "Deslizá para explorar",
       focusLabel: "TECNOLOGÍA CON PROPÓSITO",
       focusTitle: "De APIs robustas a agentes de IA útiles.",
       focusItems: ["Sistemas backend", "Workflows de IA", "Automatización de negocios"],
@@ -398,9 +381,6 @@ export const translations: Record<Language, SiteCopy> = {
       lead: "Bases sólidas en backend. Una práctica de IA en crecimiento. Un objetivo claro: construir soluciones que funcionen.",
       profile:
         "Desarrollador Backend con experiencia en Java y Spring Boot, enfocado en la construcción de APIs REST y el trabajo con bases de datos relacionales. Apasionado por la arquitectura backend, la automatización y los sistemas escalables. Recientemente ampliando conocimientos en soluciones impulsadas por IA, desarrollando flujos de trabajo basados en agentes y pipelines de automatización utilizando herramientas modernas de inteligencia artificial. Disfruto resolver problemas complejos y aprender continuamente nuevas tecnologías, y actualmente busco oportunidades donde pueda contribuir al desarrollo backend y a sistemas impulsados por IA mientras continúo creciendo profesionalmente.",
-      portraitAlt: "Placeholder de retrato abstracto oscuro con las iniciales FS",
-      portraitLabel: "TU FOTO VA ACÁ",
-      portraitNote: "Reemplazá esta imagen por tu foto",
       stats: [
         { value: "Por proyectos", label: "Experiencia backend", note: "APIs · bases de datos · automatización" },
         { value: "Córdoba, AR", label: "Ubicación", note: "Argentina · UTC−3" },
@@ -529,25 +509,21 @@ export const translations: Record<Language, SiteCopy> = {
       title: "¿Tenés un buen problema para resolver?",
       lead: "Construyamos algo con propósito.",
       description:
-        "Contame en qué estás trabajando. Estoy abierto a oportunidades backend, proyectos de automatización con IA y colaboraciones.",
+        "Estoy abierto a oportunidades backend, proyectos de automatización con IA y colaboraciones.",
       emailLabel: "Correo",
       phoneLabel: "Teléfono",
       formTitle: "Enviame un mensaje",
-      nameLabel: "Tu nombre",
-      namePlaceholder: "¿Cómo te llamás?",
-      emailFieldLabel: "Correo electrónico",
-      emailPlaceholder: "vos@empresa.com",
-      messageLabel: "¿Qué estás construyendo?",
-      messagePlaceholder: "Un poco de contexto ayuda mucho...",
-      submit: "Preparar correo",
-      sendingNote: "Se abrirá tu aplicación de correo con el mensaje listo para enviar.",
+      nameLabel: "Nombre",
+      emailFieldLabel: "Correo",
+      messageLabel: "Mensaje",
+      submit: "Enviar mensaje",
+      submittedMessage: "Borrador listo.",
       socialTitle: "También podés encontrarme en",
       locationLabel: "Córdoba, Argentina",
     },
     footer: {
       note: "Diseñado con cuidado. Construido con código.",
       rights: "Todos los derechos reservados.",
-      backToTop: "Volver arriba",
     },
   },
 };

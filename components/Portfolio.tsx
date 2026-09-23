@@ -49,9 +49,8 @@ export function Portfolio() {
       </main>
       <footer className="site-footer">
         <div className="footer-inner mx-auto flex w-full max-w-site items-center justify-between px-5 sm:px-8 lg:px-12">
-          <a className="footer-brand" href="#home">FS<span>.</span></a>
+          <a className="footer-brand" href="#home">facundo<span>.</span></a>
           <p>{copy.footer.note} <span>© {new Date().getFullYear()} Facundo Scholze.</span> {copy.footer.rights}</p>
-          <a className="back-to-top" href="#home">{copy.footer.backToTop}<span aria-hidden="true">↑</span></a>
         </div>
       </footer>
     </SmoothScroll>

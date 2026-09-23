@@ -13,7 +13,7 @@ type ContactProps = {
 };
 
 export function Contact({ copy, social }: ContactProps) {
-  const [hasPreparedEmail, setHasPreparedEmail] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,10 +22,17 @@ export function Contact({ copy, social }: ContactProps) {
     const email = String(formData.get("email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
 
+    const plainTextBody = `${copy.nameLabel}: ${name}\n${copy.emailFieldLabel}: ${email}\n\n${message}`;
     const subject = encodeURIComponent(`${copy.emailSubject} ${name}`);
-    const body = encodeURIComponent(`${copy.nameLabel}: ${name}\n${copy.emailFieldLabel}: ${email}\n\n${message}`);
+    const body = encodeURIComponent(plainTextBody);
+
+    // The site is a static export: copy the message as a fallback, then open
+    // the visitor's mail app with the same details pre-filled.
+    if (navigator.clipboard?.writeText) {
+      void navigator.clipboard.writeText(plainTextBody).catch(() => undefined);
+    }
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setHasPreparedEmail(true);
+    setHasSubmitted(true);
   };
 
   return (
@@ -39,8 +46,6 @@ export function Contact({ copy, social }: ContactProps) {
           <Reveal className="contact-intro" delay={0.08}>
             <span className="contact-spark" aria-hidden="true">✳</span>
             <h3>{copy.lead}</h3>
-            <p>{copy.description}</p>
-
             <div className="contact-details">
               <a className="contact-detail" href={`mailto:${CONTACT_EMAIL}`}>
                 <span className="contact-detail-icon" aria-hidden="true">↗</span>
@@ -64,30 +69,26 @@ export function Contact({ copy, social }: ContactProps) {
 
           <Reveal className="contact-form-wrap" delay={0.16}>
             <div className="contact-form-heading">
-              <div><span className="contact-form-index">01 /</span><h3>{copy.formTitle}</h3></div>
-              <span className="contact-form-status"><i />{copy.locationLabel}</span>
+              <h3>{copy.formTitle}</h3>
             </div>
             <form className="contact-form" onSubmit={handleSubmit}>
               <label className="form-field">
                 <span>{copy.nameLabel}</span>
-                <input name="name" type="text" autoComplete="name" placeholder={copy.namePlaceholder} required />
+                <input name="name" type="text" autoComplete="name" required />
               </label>
               <label className="form-field">
                 <span>{copy.emailFieldLabel}</span>
-                <input name="email" type="email" autoComplete="email" placeholder={copy.emailPlaceholder} required />
+                <input name="email" type="email" autoComplete="email" required />
               </label>
               <label className="form-field form-field--message">
                 <span>{copy.messageLabel}</span>
-                <textarea name="message" rows={4} placeholder={copy.messagePlaceholder} required />
+                <textarea name="message" rows={4} required />
               </label>
               <div className="contact-form-bottom">
                 <button className="button button--primary contact-submit" type="submit">
                   <span>{copy.submit}</span><span className="button-arrow" aria-hidden="true">↗</span>
                 </button>
-                <p className={`form-note${hasPreparedEmail ? " form-note--sent" : ""}`} role="status" aria-live="polite">
-                  {hasPreparedEmail ? <span className="form-note-check" aria-hidden="true">✓</span> : null}
-                  {copy.sendingNote}
-                </p>
+                {hasSubmitted ? <p className="form-note" role="status" aria-live="polite">{copy.submittedMessage}</p> : null}
               </div>
             </form>
           </Reveal>

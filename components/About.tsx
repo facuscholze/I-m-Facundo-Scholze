@@ -22,7 +22,7 @@ export function About({ copy }: AboutProps) {
               <div className="portrait-glow" aria-hidden="true" />
               <Image
                 src={withBasePath("/images/avatar-placeholder.webp")}
-                alt={copy.portraitAlt}
+                alt=""
                 width={760}
                 height={840}
                 unoptimized
@@ -30,17 +30,6 @@ export function About({ copy }: AboutProps) {
                 sizes="(max-width: 800px) 85vw, 38vw"
                 className="portrait-image"
               />
-              <div className="portrait-monogram" aria-hidden="true">FS<span>.</span></div>
-              <div className="portrait-image-label">
-                <span className="portrait-label-mark" />
-                <div><span>{copy.portraitLabel}</span><small>{copy.portraitNote}</small></div>
-              </div>
-              <span className="portrait-index" aria-hidden="true">CBA / AR</span>
-            </div>
-            <div className="about-portrait-caption">
-              <span className="caption-line" />
-              <span>FACUNDO SCHOLZE</span>
-              <span className="caption-line" />
             </div>
           </Reveal>
 

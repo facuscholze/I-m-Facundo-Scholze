@@ -49,7 +49,12 @@ export function Navbar({ language, copy, languageCopy, onLanguageChange }: Navba
       <div className="nav-inner mx-auto flex w-full max-w-site items-center justify-between px-5 sm:px-8 lg:px-12">
         <a className="brand-lockup" href="#home" onClick={closeMenu} aria-label="Facundo Scholze — home">
           <span className="brand-mark" aria-hidden="true">
-            <span>F</span><span>S</span><i />
+            <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="17" cy="17" r="10" stroke="currentColor" strokeOpacity=".58" />
+              <circle cx="17" cy="17" r="3.2" fill="currentColor" />
+              <path d="M17 3v5m0 18v5M3 17h5m18 0h5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              <circle cx="27" cy="8" r="1.3" fill="#8FE7C5" />
+            </svg>
           </span>
           <span className="brand-name">facundo<span>.</span></span>
         </a>

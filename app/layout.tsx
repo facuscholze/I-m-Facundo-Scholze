@@ -5,11 +5,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://facuscholze.github.io/I-m-Facundo-Scholze/"),
   title: {
-    default: "Facundo Scholze — Full Stack Developer & AI Automation Engineer",
+    default: "Facundo Scholze — Full Stack Developer",
     template: "%s | Facundo Scholze",
   },
   description:
-    "Portfolio of Facundo Scholze, a backend-focused Full Stack Developer and AI Automation Engineer based in Córdoba, Argentina. Java, Spring Boot, APIs, AI agents, and workflow automation.",
+    "Portfolio of Facundo Scholze, a Full Stack Developer based in Córdoba, Argentina. Backend engineering, APIs, AI agents, and workflow automation.",
   applicationName: "Facundo Scholze Portfolio",
   authors: [{ name: "Facundo Scholze", url: "https://github.com/facuscholze" }],
   creator: "Facundo Scholze",
@@ -27,15 +27,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://facuscholze.github.io/I-m-Facundo-Scholze/",
-    title: "Facundo Scholze — Full Stack Developer & AI Automation Engineer",
+    title: "Facundo Scholze — Full Stack Developer",
     description:
-      "Backend engineering, AI agents, and thoughtful automation. Portfolio of Facundo Scholze, based in Córdoba, Argentina.",
+      "Full Stack Developer based in Córdoba, Argentina. Backend engineering, AI agents, and thoughtful automation.",
     siteName: "Facundo Scholze",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Facundo Scholze — Full Stack Developer & AI Automation Engineer",
-    description: "Backend engineering, AI agents, and thoughtful automation.",
+    title: "Facundo Scholze — Full Stack Developer",
+    description: "Full Stack Developer based in Córdoba, Argentina. Backend engineering, AI agents, and thoughtful automation.",
   },
   robots: {
     index: true,
@@ -56,7 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         {/* Devicon supplies familiar technology marks in the skills grid. */}

@@ -15,8 +15,8 @@ const config: Config = {
         muted: "#9ba6a0",
       },
       fontFamily: {
-        display: ["Bricolage Grotesque", "sans-serif"],
-        sans: ["Manrope", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
+        sans: ["DM Sans", "sans-serif"],
         mono: ["IBM Plex Mono", "monospace"],
       },
       maxWidth: {

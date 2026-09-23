@@ -165,7 +165,7 @@ export function Hero({ copy, social, language }: HeroProps) {
                   <h2>{copy.cardTitle}</h2>
                   <p>{copy.focusTitle}</p>
                 </div>
-                <div className="focus-monogram" aria-hidden="true">FS<span>+</span></div>
+                <span className="focus-icon-mark" aria-hidden="true"><i /><b /></span>
               </div>
               <div className="focus-divider" />
               <div className="focus-list">
@@ -197,10 +197,6 @@ export function Hero({ copy, social, language }: HeroProps) {
 
         <div className="hero-bottomline">
           <span className="hero-bottomline-left">{copy.bottomline}</span>
-          <a className="scroll-cue" href="#about">
-            <span>{copy.scroll}</span>
-            <span className="scroll-cue-line" aria-hidden="true"><i /></span>
-          </a>
           <span className="hero-bottomline-right">01 — 06</span>
         </div>
       </div>
