@@ -1,0 +1,43 @@
+FACUNDO SCHOLZE
+Full Stack Developer & AI Automation Engineer
+Córdoba, Argentina
+
+CONTACT
+Email: scholzefacundotrabajo@gmail.com
+Phone: (54) 375562-9953
+GitHub: https://github.com/facuscholze
+LinkedIn: https://linkedin.com/in/facundo-luciano-scholze
+
+PROFILE
+Backend Developer with experience in Java and Spring Boot, focused on building REST APIs and working with relational databases. Passionate about backend architecture, automation, and scalable systems. Recently expanding into AI-driven solutions, developing agent-based workflows and automation pipelines using modern AI tools. I enjoy solving complex problems and continuously learning new technologies, and I am currently seeking opportunities where I can contribute to backend and AI-powered systems while growing professionally.
+
+SELECTED PROJECTS
+World Car Rental — Backend
+Contributed to the backend development of a web platform for car rentals. Responsible for implementing the business logic, designing the database structure, managing security, and developing the server-side functionality from scratch.
+Technologies: Java, Spring Boot, Spring Security, MySQL, Hibernate
+Repository: https://github.com/facuscholze/World-Car-Rental-Back-End
+
+CrewAI — AI Agents
+Designed and implemented AI agent workflows to automate tasks and integrate APIs using CrewAI and workflow orchestration tools. Built systems capable of processing user inputs, structuring data, and triggering automated actions through intelligent agents.
+Technologies: Python, CrewAI, LLMs, agent orchestration
+Repository: https://github.com/facuscholze/crewAI
+
+WhatsApp AI automation
+Confidential client work: AI-powered WhatsApp conversational agents for customer support and business automation in SMEs.
+Technologies: n8n, WhatsApp Meta Cloud API, Supabase, OpenAI API
+
+EDUCATION
+Certified Tech Developer — Digital House, Globant y Mercado Libre (2022-2024)
+Backend Specialist — Digital House, Globant y Mercado Libre (2024-2025)
+
+TECHNICAL SKILLS
+Backend: Java, Spring Boot, Spring Security, Hibernate, Node.js, Python
+Frontend: React, JavaScript, HTML5, CSS3
+Databases: MySQL, PostgreSQL, Supabase/pgvector, Stored Procedures
+AI & Automation: n8n, CrewAI, OpenAI API, LLM integration, prompt engineering, agent orchestration
+Infrastructure & DevOps: Docker, Coolify, AWS, Terraform, Ansible, CI/CD (Jenkins), Bash, PowerShell
+Tools: Git/GitHub, Postman, Docker, Linux/Windows
+
+LANGUAGES & SOFT SKILLS
+Spanish — Native | English — Basic | Portuguese — Fluent (spoken)
+Teamwork, Flexibility, Proactive, Learning

@@ -1,0 +1,43 @@
+FACUNDO SCHOLZE
+Desarrollador Full Stack e Ingeniero de Automatización con IA
+Córdoba, Argentina
+
+CONTACTO
+Correo: scholzefacundotrabajo@gmail.com
+Teléfono: (54) 375562-9953
+GitHub: https://github.com/facuscholze
+LinkedIn: https://linkedin.com/in/facundo-luciano-scholze
+
+PERFIL
+Desarrollador Backend con experiencia en Java y Spring Boot, enfocado en la construcción de APIs REST y el trabajo con bases de datos relacionales. Apasionado por la arquitectura backend, la automatización y los sistemas escalables. Recientemente ampliando conocimientos en soluciones impulsadas por IA, desarrollando flujos de trabajo basados en agentes y pipelines de automatización utilizando herramientas modernas de inteligencia artificial. Disfruto resolver problemas complejos y aprender continuamente nuevas tecnologías, y actualmente busco oportunidades donde pueda contribuir al desarrollo backend y a sistemas impulsados por IA mientras continúo creciendo profesionalmente.
+
+PROYECTOS DESTACADOS
+World Car Rental — Backend
+Contribuí al desarrollo backend de una plataforma web de alquiler de autos. Responsable de implementar la lógica de negocio, diseñar la estructura de la base de datos, gestionar la seguridad y desarrollar la funcionalidad del lado del servidor desde cero.
+Tecnologías: Java, Spring Boot, Spring Security, MySQL, Hibernate
+Repositorio: https://github.com/facuscholze/World-Car-Rental-Back-End
+
+CrewAI — Agentes de IA
+Diseño e implementación de flujos de trabajo con agentes de inteligencia artificial para automatizar tareas e integrar APIs utilizando CrewAI y herramientas de orquestación de workflows. Desarrollo de sistemas capaces de procesar entradas de usuarios, estructurar datos y ejecutar acciones automatizadas mediante agentes inteligentes.
+Tecnologías: Python, CrewAI, LLMs, orquestación de agentes
+Repositorio: https://github.com/facuscholze/crewAI
+
+Automatización de IA para WhatsApp
+Proyecto confidencial: agentes conversacionales de WhatsApp con IA para atención al cliente y automatización de negocio en PyMEs.
+Tecnologías: n8n, WhatsApp Meta Cloud API, Supabase, OpenAI API
+
+EDUCACIÓN
+Certified Tech Developer — Digital House, Globant y Mercado Libre (2022-2024)
+Backend Specialist — Digital House, Globant y Mercado Libre (2024-2025)
+
+HABILIDADES TÉCNICAS
+Backend: Java, Spring Boot, Spring Security, Hibernate, Node.js, Python
+Frontend: React, JavaScript, HTML5, CSS3
+Bases de datos: MySQL, PostgreSQL, Supabase/pgvector, Stored Procedures
+IA y automatización: n8n, CrewAI, OpenAI API, integración de LLMs, ingeniería de prompts, orquestación de agentes
+Infraestructura y DevOps: Docker, Coolify, AWS, Terraform, Ansible, CI/CD (Jenkins), Bash, PowerShell
+Herramientas: Git/GitHub, Postman, Docker, Linux/Windows
+
+IDIOMAS Y HABILIDADES BLANDAS
+Español — Nativo | Inglés — Básico | Portugués — Fluido (oral)
+Trabajo en equipo, Flexibilidad, Proactivo, Aprendizaje
