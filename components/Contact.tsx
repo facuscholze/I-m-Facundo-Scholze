@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SocialLinks } from "@/components/SocialLinks";
-import { CONTACT_EMAIL, CONTACT_PHONE } from "@/lib/site";
+import { CONTACT_EMAIL, CONTACT_PHONE, gmailComposeUrl, openExternalTabOrFollow } from "@/lib/site";
 import type { SiteCopy } from "@/lib/translations";
 
 type ContactProps = {
@@ -14,20 +14,7 @@ type ContactProps = {
 
 type SubmitState = "idle" | "sending" | "success" | "error";
 
-// Gmail web compose deep link: prefills recipient, subject ("su") and body
-// without depending on a desktop mail client being registered for mailto:.
-const GMAIL_COMPOSE_BASE = "https://mail.google.com/mail/";
-
-function buildGmailComposeUrl({ to, subject, body }: { to: string; subject: string; body: string }) {
-  return (
-    `${GMAIL_COMPOSE_BASE}?view=cm&fs=1` +
-    `&to=${encodeURIComponent(to)}` +
-    `&su=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`
-  );
-}
-
-const GMAIL_DIRECT_URL = buildGmailComposeUrl({ to: CONTACT_EMAIL, subject: "", body: "" });
+const GMAIL_DIRECT_URL = gmailComposeUrl();
 
 export function Contact({ copy, social }: ContactProps) {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
@@ -56,7 +43,7 @@ export function Contact({ copy, social }: ContactProps) {
       }
 
       const plainTextBody = `${copy.nameLabel}: ${name}\n\n${message}`;
-      const gmailUrl = buildGmailComposeUrl({ to: CONTACT_EMAIL, subject: reason, body: plainTextBody });
+      const gmailUrl = gmailComposeUrl({ to: CONTACT_EMAIL, subject: reason, body: plainTextBody });
       setComposeUrl(gmailUrl);
 
       // Open Gmail while the click's user-activation is still fresh:
@@ -111,7 +98,11 @@ export function Contact({ copy, social }: ContactProps) {
             <span className="contact-spark" aria-hidden="true">✳</span>
             <h3>{copy.lead}</h3>
             <div className="contact-details">
-              <a className="contact-detail" href={`mailto:${CONTACT_EMAIL}`}>
+              <a
+                className="contact-detail"
+                href={GMAIL_DIRECT_URL}
+                onClick={(event) => openExternalTabOrFollow(event, GMAIL_DIRECT_URL)}
+              >
                 <span className="contact-detail-icon" aria-hidden="true">↗</span>
                 <span><small>{copy.emailLabel}</small><strong>{CONTACT_EMAIL}</strong></span>
               </a>
