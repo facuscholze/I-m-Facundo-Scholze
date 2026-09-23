@@ -14,10 +14,24 @@ type ContactProps = {
 
 type SubmitState = "idle" | "sending" | "success" | "error";
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Gmail web compose deep link: prefills recipient, subject ("su") and body
+// without depending on a desktop mail client being registered for mailto:.
+const GMAIL_COMPOSE_BASE = "https://mail.google.com/mail/";
+
+function buildGmailComposeUrl({ to, subject, body }: { to: string; subject: string; body: string }) {
+  return (
+    `${GMAIL_COMPOSE_BASE}?view=cm&fs=1` +
+    `&to=${encodeURIComponent(to)}` +
+    `&su=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(body)}`
+  );
+}
+
+const GMAIL_DIRECT_URL = buildGmailComposeUrl({ to: CONTACT_EMAIL, subject: "", body: "" });
 
 export function Contact({ copy, social }: ContactProps) {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [composeUrl, setComposeUrl] = useState<string | null>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     // Capture the form synchronously: React clears event.currentTarget as
@@ -31,38 +45,52 @@ export function Contact({ copy, social }: ContactProps) {
     try {
       const formData = new FormData(form);
       const name = String(formData.get("name") ?? "").trim();
-      const email = String(formData.get("email") ?? "").trim();
+      const reason = String(formData.get("reason") ?? "").trim();
       const message = String(formData.get("message") ?? "").trim();
 
-      // Native `required` / `type="email"` validation runs before this event
-      // fires; this guard keeps the UI from ever reporting success for an
-      // incomplete or malformed payload.
-      if (!name || !email || !message || !EMAIL_PATTERN.test(email)) {
+      // Native `required` validation runs before this event fires; this guard
+      // keeps the UI from ever reporting success for an incomplete payload.
+      if (!name || !reason || !message) {
         setSubmitState("error");
         return;
       }
 
-      const plainTextBody = `${copy.nameLabel}: ${name}\n${copy.emailFieldLabel}: ${email}\n\n${message}`;
-      const subject = encodeURIComponent(`${copy.emailSubject} ${name}`);
-      const body = encodeURIComponent(plainTextBody);
+      const plainTextBody = `${copy.nameLabel}: ${name}\n\n${message}`;
+      const gmailUrl = buildGmailComposeUrl({ to: CONTACT_EMAIL, subject: reason, body: plainTextBody });
+      setComposeUrl(gmailUrl);
 
-      // The site is a static export: copy the message as a fallback, then open
-      // the visitor's mail app with the same details pre-filled. Clipboard
-      // access is best-effort and must never block the send itself.
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(plainTextBody).catch(() => undefined);
+      // Open Gmail while the click's user-activation is still fresh:
+      // - Regular tab → redirect this tab to Gmail (the requested behavior).
+      // - Embedded preview iframe → open a new tab so the host UI is not
+      //   navigated away; fall through to the redirect if popups are blocked.
+      const isEmbedded = window.top !== window;
+      let openedTab: Window | null = null;
+      if (isEmbedded) {
+        openedTab = window.open(gmailUrl, "_blank");
+        if (openedTab) {
+          try {
+            openedTab.opener = null;
+          } catch {
+            // Cross-origin assignment can be refused; the tab is already open.
+          }
+        }
       }
 
-      // The mailto hand-off below is synchronous and immediately hands control
-      // to the OS mail handler (which can stall the main thread briefly), so
-      // yield long enough for the loading state to actually paint first — on
-      // desktop and mobile alike.
-      await new Promise((resolve) => setTimeout(resolve, 350));
+      // Copy the full message as a best-effort fallback; never blocks the send.
+      const clipboardPayload = `${copy.reasonFieldLabel}: ${reason}\n${copy.nameLabel}: ${name}\n\n${message}`;
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(clipboardPayload).catch(() => undefined);
+      }
 
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      // Yield long enough for the loading state to paint before we leave.
+      await new Promise((resolve) => setTimeout(resolve, 350));
 
       form.reset();
       setSubmitState("success");
+
+      if (!openedTab) {
+        window.location.href = gmailUrl;
+      }
     } catch {
       // Keep the visitor's input on failure so they can retry without retyping.
       setSubmitState("error");
@@ -113,8 +141,8 @@ export function Contact({ copy, social }: ContactProps) {
                 <input name="name" type="text" autoComplete="name" required />
               </label>
               <label className="form-field">
-                <span>{copy.emailFieldLabel}</span>
-                <input name="email" type="email" autoComplete="email" required />
+                <span>{copy.reasonFieldLabel}</span>
+                <input name="reason" type="text" autoComplete="off" required />
               </label>
               <label className="form-field form-field--message">
                 <span>{copy.messageLabel}</span>
@@ -134,7 +162,12 @@ export function Contact({ copy, social }: ContactProps) {
                     <span className="form-note-check" aria-hidden="true">✓</span>
                     <span>
                       {copy.submittedMessage}{" "}
-                      <a className="form-note-link" href={`mailto:${CONTACT_EMAIL}`}>
+                      <a
+                        className="form-note-link"
+                        href={composeUrl ?? GMAIL_DIRECT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {copy.fallbackMessage} {CONTACT_EMAIL}
                       </a>
                     </span>

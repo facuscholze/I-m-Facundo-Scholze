@@ -110,7 +110,6 @@ export type SiteCopy = {
   };
   contact: {
     eyebrow: string;
-    emailSubject: string;
     title: string;
     lead: string;
     description: string;
@@ -118,7 +117,7 @@ export type SiteCopy = {
     phoneLabel: string;
     formTitle: string;
     nameLabel: string;
-    emailFieldLabel: string;
+    reasonFieldLabel: string;
     messageLabel: string;
     submit: string;
     submittedMessage: string;
@@ -313,7 +312,6 @@ export const translations: Record<Language, SiteCopy> = {
     },
     contact: {
       eyebrow: "06 / CONTACT",
-      emailSubject: "Portfolio message from",
       title: "Have a good problem to solve?",
       lead: "Let's build something thoughtful.",
       description:
@@ -322,13 +320,13 @@ export const translations: Record<Language, SiteCopy> = {
       phoneLabel: "Phone",
       formTitle: "Send a message",
       nameLabel: "Name",
-      emailFieldLabel: "Email",
+      reasonFieldLabel: "Reason",
       messageLabel: "Message",
       submit: "Send message",
-      submittedMessage: "Message ready in your mail app.",
-      sendingLabel: "Sending…",
-      errorMessage: "We couldn't prepare your message. Please try again or email me directly.",
-      fallbackMessage: "If your mail app didn't open, write to",
+      submittedMessage: "Gmail opened with your message ready to send.",
+      sendingLabel: "Opening Gmail…",
+      errorMessage: "We couldn't prepare your message. Please try again or write to me directly.",
+      fallbackMessage: "If Gmail didn't open, write to",
       socialTitle: "Find me elsewhere",
       locationLabel: "Córdoba, Argentina",
     },
@@ -514,7 +512,6 @@ export const translations: Record<Language, SiteCopy> = {
     },
     contact: {
       eyebrow: "06 / CONTACTO",
-      emailSubject: "Mensaje desde el portfolio de",
       title: "¿Tenés un buen problema para resolver?",
       lead: "Construyamos algo con propósito.",
       description:
@@ -523,13 +520,13 @@ export const translations: Record<Language, SiteCopy> = {
       phoneLabel: "Teléfono",
       formTitle: "Enviame un mensaje",
       nameLabel: "Nombre",
-      emailFieldLabel: "Correo",
+      reasonFieldLabel: "Motivo",
       messageLabel: "Mensaje",
       submit: "Enviar mensaje",
-      submittedMessage: "Mensaje listo en tu app de correo.",
-      sendingLabel: "Enviando…",
-      errorMessage: "No pudimos preparar tu mensaje. Intentá de nuevo o escribime directamente por correo.",
-      fallbackMessage: "Si no se abrió tu app de correo, escribime a",
+      submittedMessage: "Gmail se abrió con tu mensaje listo para enviar.",
+      sendingLabel: "Abriendo Gmail…",
+      errorMessage: "No pudimos preparar tu mensaje. Intentá de nuevo o escribime directamente.",
+      fallbackMessage: "Si no se abrió Gmail, escribime a",
       socialTitle: "También podés encontrarme en",
       locationLabel: "Córdoba, Argentina",
     },
