@@ -124,8 +124,8 @@ export function Hero({ copy, social, language }: HeroProps) {
               </a>
               <a
                 className="button button--secondary"
-                href={withBasePath(`/cv-facundo-scholze-${language}.txt`)}
-                download={`Facundo-Scholze-CV-${language.toUpperCase()}.txt`}
+                href={withBasePath(language === "en" ? "/Facundo_Scholze_fsENG.pdf" : "/Facundo_Scholze_fsESP.pdf")}
+                download={language === "en" ? "Facundo_Scholze_fsENG.pdf" : "Facundo_Scholze_fsESP.pdf"}
               >
                 <span className="download-icon" aria-hidden="true">↓</span>
                 <span>{copy.downloadCv}</span>

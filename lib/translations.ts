@@ -65,6 +65,7 @@ export type SiteCopy = {
     title: string;
     lead: string;
     profile: string;
+    portraitAlt: string;
     stats: { value: string; label: string; note: string }[];
   };
   skills: {
@@ -185,6 +186,7 @@ export const translations: Record<Language, SiteCopy> = {
       lead: "Backend foundations. A growing AI practice. One clear goal: build things that work.",
       profile:
         "Backend Developer with experience in Java and Spring Boot, focused on building REST APIs and working with relational databases. Passionate about backend architecture, automation, and scalable systems. Recently expanding into AI-driven solutions, developing agent-based workflows and automation pipelines using modern AI tools. I enjoy solving complex problems and continuously learning new technologies, and I am currently seeking opportunities where I can contribute to backend and AI-powered systems while growing professionally.",
+      portraitAlt: "Portrait of Facundo Scholze",
       stats: [
         { value: "Project-based", label: "Backend experience", note: "APIs · databases · automation" },
         { value: "Córdoba, AR", label: "Based in", note: "Argentina · UTC−3" },
@@ -381,6 +383,7 @@ export const translations: Record<Language, SiteCopy> = {
       lead: "Bases sólidas en backend. Una práctica de IA en crecimiento. Un objetivo claro: construir soluciones que funcionen.",
       profile:
         "Desarrollador Backend con experiencia en Java y Spring Boot, enfocado en la construcción de APIs REST y el trabajo con bases de datos relacionales. Apasionado por la arquitectura backend, la automatización y los sistemas escalables. Recientemente ampliando conocimientos en soluciones impulsadas por IA, desarrollando flujos de trabajo basados en agentes y pipelines de automatización utilizando herramientas modernas de inteligencia artificial. Disfruto resolver problemas complejos y aprender continuamente nuevas tecnologías, y actualmente busco oportunidades donde pueda contribuir al desarrollo backend y a sistemas impulsados por IA mientras continúo creciendo profesionalmente.",
+      portraitAlt: "Retrato de Facundo Scholze",
       stats: [
         { value: "Por proyectos", label: "Experiencia backend", note: "APIs · bases de datos · automatización" },
         { value: "Córdoba, AR", label: "Ubicación", note: "Argentina · UTC−3" },

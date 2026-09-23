@@ -21,8 +21,8 @@ export function About({ copy }: AboutProps) {
             <div className="portrait-frame">
               <div className="portrait-glow" aria-hidden="true" />
               <Image
-                src={withBasePath("/images/avatar-placeholder.webp")}
-                alt=""
+                src={withBasePath("/avatar-Facundo.webp")}
+                alt={copy.portraitAlt}
                 width={760}
                 height={840}
                 unoptimized

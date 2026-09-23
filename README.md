@@ -33,8 +33,8 @@ El workflow `.github/workflows/deploy.yml` construye y publica el sitio al hacer
 
 ## Personalización rápida
 
-- **Foto:** reemplazá `public/images/avatar-placeholder.webp` por una foto propia optimizada en WebP o AVIF. Conservá el nombre (o actualizá la ruta en `components/About.tsx`). El avatar abstracto original está en `public/images/avatar-placeholder.svg`.
-- **CV:** los botones descargan `public/cv-facundo-scholze-en.txt` o `public/cv-facundo-scholze-es.txt` según el idioma. Si preferís PDF, agregalo a `public/` y actualizá el enlace en `components/Hero.tsx`.
+- **Foto:** `public/avatar-Facundo.webp` se usa en la sección Sobre mí y está optimizada para la web. `app/icon.png` usa un recorte de la misma foto como favicon. Reemplazá esos archivos si cambiás el retrato.
+- **CV:** los botones descargan `public/Facundo_Scholze_fsENG.pdf` o `public/Facundo_Scholze_fsESP.pdf` según el idioma. Actualizá las rutas en `components/Hero.tsx` si cambiás los nombres.
 - **Textos e idiomas:** editá `lib/translations.ts`. Los bloques de perfil, proyectos, educación, idiomas y soft skills suministrados para este sitio se mantienen textualmente en el diccionario.
 - **Skills:** agregá o quitá tecnologías en `lib/skills.ts`; los nombres traducibles se mapean dentro de `skills.skillLabels`.
 - **Proyectos y experiencia:** modificá `projects.items` y `timeline.entries` en `lib/translations.ts`. Los links externos se abren en una pestaña nueva.
